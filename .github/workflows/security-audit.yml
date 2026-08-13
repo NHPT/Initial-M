@@ -9,19 +9,34 @@ on:
       - 'ci/**'
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '23 3 * * 1'
 
 permissions:
   contents: read
-  security-events: write
 
 concurrency:
   group: security-audit-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  workflow-lint:
+    name: GitHub Actions Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run actionlint
+        uses: docker://rhysd/actionlint:1.7.7
+        with:
+          args: -color
+
   php-lint:
     name: PHP Syntax Check (${{ matrix.php-version }})
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
@@ -50,6 +65,10 @@ jobs:
   semgrep:
     name: Semgrep Security Scan
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -68,10 +87,12 @@ jobs:
             --config p/php \
             --config p/security-audit \
             --config p/owasp-top-ten \
+            --config p/secrets \
             --sarif --output semgrep.sarif \
             --error \
             --exclude '.git' \
-            --exclude 'vendor'
+            --exclude 'vendor' \
+            --exclude 'img'
 
       - name: Upload Semgrep SARIF
         if: always()
@@ -79,3 +100,43 @@ jobs:
         continue-on-error: true
         with:
           sarif_file: semgrep.sarif
+
+  secret-scan:
+    name: Gitleaks Secret Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dependency-audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Composer audit
+        if: hashFiles('composer.json') != ''
+        run: |
+          set -euo pipefail
+          composer validate --no-check-publish --strict
+          composer audit --format=plain
+
+      - name: NPM audit
+        if: hashFiles('package-lock.json', 'npm-shrinkwrap.json') != ''
+        run: |
+          set -euo pipefail
+          npm audit --audit-level=moderate
+
+      - name: No dependency manifests
+        if: hashFiles('composer.json', 'package-lock.json', 'npm-shrinkwrap.json') == ''
+        run: echo "No Composer or NPM dependency manifest found; dependency audit skipped."
