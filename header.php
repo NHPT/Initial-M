@@ -237,7 +237,7 @@ $this->header('description=&social=&generator=&template=&pingback=&xmlrpc=&wlw=&
 </button>
 <button class="theme-switcher__option" type="button" role="menuitemradio" aria-checked="<?php echo $defaultThemeMode === 'dark' ? 'true' : 'false'; ?>" data-theme-value="dark">
 <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
-<path d="M12 3a6 6 0 0 0 9 9 9 0 1 1-9-9Z"></path>
+<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
 </svg>
 <span>深色</span>
 </button>
