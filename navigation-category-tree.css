@@ -28,16 +28,6 @@
 	text-overflow: ellipsis;
 }
 
-/* 子菜单使用实色文字，避免自定义渐变文字在悬停背景上变透明。 */
-.nav-menu .nav-category-tree a {
-	color: var(--theme-text, #666) !important;
-	background: transparent !important;
-	background-clip: border-box !important;
-	-webkit-background-clip: border-box !important;
-	-webkit-text-fill-color: currentColor !important;
-	text-shadow: none !important;
-}
-
 .nav-category-tree .category-active > a,
 .nav-category-tree .category-parent-active > a {
 	font-weight: 700;
@@ -90,10 +80,9 @@
 		display: none;
 	}
 
-	.nav-menu .nav-category-tree a:hover,
-	.nav-menu .nav-category-tree a:focus-visible {
-		color: var(--theme-text-strong, #333) !important;
-		background: var(--theme-nav-hover-bg, rgba(255, 255, 255, .55)) !important;
+	.nav-category-tree a:hover,
+	.nav-category-tree a:focus-visible {
+		background: rgba(255, 255, 255, .55);
 	}
 }
 

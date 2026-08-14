@@ -11,7 +11,6 @@
 	--theme-accent: #ff6b35;
 	--theme-accent-soft: rgba(255, 107, 53, .1);
 	--theme-shadow: rgba(15, 23, 42, .12);
-	--theme-nav-hover-bg: rgba(255, 255, 255, .55);
 }
 
 html.theme-dark {
@@ -27,7 +26,6 @@ html.theme-dark {
 	--theme-accent: #ff7a45;
 	--theme-accent-soft: rgba(255, 122, 69, .14);
 	--theme-shadow: rgba(0, 0, 0, .35);
-	--theme-nav-hover-bg: rgba(255, 255, 255, .06);
 	--page-bg: var(--theme-page-bg);
 	--card-bg: var(--theme-surface);
 	--text-color: var(--theme-text);
