@@ -161,7 +161,7 @@ function themeConfig($form) {
 	$RelatedPosts = new Typecho_Widget_Helper_Form_Element_Radio('RelatedPosts',
 	array(1 => _t('启用'),
 	0 => _t('关闭')),
-	0, _t('相关文章'), _t('默认关闭，启用后在文章版权声明之后推荐相关内容'));
+	0, _t('推荐文章'), _t('默认关闭，启用后在文章版权声明之后显示推荐内容'));
 	$form->addInput($RelatedPosts);
 
 	$RelatedPostsNumber = new Typecho_Widget_Helper_Form_Element_Select('RelatedPostsNumber',
@@ -169,7 +169,7 @@ function themeConfig($form) {
 	4 => _t('4 篇'),
 	6 => _t('6 篇'),
 	8 => _t('8 篇')),
-	4, _t('相关文章数量'), _t('优先推荐相同标签和分类的文章，不足时使用最新文章补齐'));
+	4, _t('推荐文章数量'), _t('优先推荐相同标签和分类的文章，不足时使用最新文章补齐'));
 	$form->addInput($RelatedPostsNumber);
 
 	$scrollTop = new Typecho_Widget_Helper_Form_Element_Radio('scrollTop', 
@@ -875,7 +875,7 @@ function InitialRelatedPosts($archive, $limit = 4) {
 
 	$widget = Typecho_Widget::widget('Widget_Abstract_Contents@relatedPosts');
 	echo '<section class="related-posts" aria-labelledby="related-posts-title">' . PHP_EOL;
-	echo '<h2 id="related-posts-title" class="related-posts__title">' . _t('相关文章') . '</h2>' . PHP_EOL;
+	echo '<h2 id="related-posts-title" class="related-posts__title">' . _t('推荐文章') . '</h2>' . PHP_EOL;
 	echo '<ul class="related-posts__list">' . PHP_EOL;
 
 	foreach ($posts as $post) {
