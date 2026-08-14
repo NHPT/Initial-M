@@ -1,21 +1,19 @@
 .related-posts {
-	margin: 8px 0 30px;
-	padding-top: 20px;
+	margin: 6px 0 24px;
+	padding-top: 14px;
 	border-top: 1px solid var(--theme-border, #e5e7eb);
 }
 
 .related-posts__title {
-	margin: 0 0 8px;
+	margin: 0 0 4px;
 	color: var(--theme-text-strong, #1f2937);
-	font-size: 1.1em;
+	font-size: 16px;
 	font-weight: 700;
 	line-height: 1.4;
 }
 
 .related-posts__list {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	column-gap: 24px;
+	display: block;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -33,12 +31,12 @@
 }
 
 .related-posts__item > a {
-	display: flex;
-	flex-direction: column;
-	gap: 3px;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 10px;
+	align-items: center;
 	box-sizing: border-box;
-	min-height: 58px;
-	padding: 10px 2px;
+	padding: 6px 2px;
 	color: var(--theme-text, #444);
 	border: 0;
 	text-decoration: none;
@@ -46,15 +44,17 @@
 
 .related-posts__name {
 	overflow-wrap: anywhere;
+	font-size: .9em;
 	font-weight: 600;
-	line-height: 1.5;
+	line-height: 1.45;
 	transition: color .2s ease;
 }
 
 .related-posts time {
 	color: var(--theme-text-muted, #667085);
-	font-size: .78em;
+	font-size: .75em;
 	line-height: 1.4;
+	white-space: nowrap;
 }
 
 .related-posts__item > a:hover .related-posts__name,
@@ -87,12 +87,12 @@
 
 @media (max-width: 640px) {
 	.related-posts {
-		margin-bottom: 24px;
-		padding-top: 16px;
+		margin-bottom: 20px;
+		padding-top: 12px;
 	}
 
-	.related-posts__list {
-		grid-template-columns: 1fr;
+	.related-posts__item > a {
+		gap: 8px;
 	}
 }
 

@@ -11,6 +11,7 @@
 	--theme-accent: #ff6b35;
 	--theme-accent-soft: rgba(255, 107, 53, .1);
 	--theme-shadow: rgba(15, 23, 42, .12);
+	--theme-nav-hover-bg: rgba(255, 255, 255, .55);
 }
 
 html.theme-dark {
@@ -26,6 +27,7 @@ html.theme-dark {
 	--theme-accent: #ff7a45;
 	--theme-accent-soft: rgba(255, 122, 69, .14);
 	--theme-shadow: rgba(0, 0, 0, .35);
+	--theme-nav-hover-bg: rgba(255, 255, 255, .06);
 	--page-bg: var(--theme-page-bg);
 	--card-bg: var(--theme-surface);
 	--text-color: var(--theme-text);
@@ -498,6 +500,12 @@ html[data-theme="auto"] .theme-switcher__icon--auto {
 .theme-dark #cornertool #catalog {
 	background: rgba(32, 36, 40, .86) !important;
 	border-color: var(--theme-border) !important;
+}
+
+/* 普通列表项不是链接，悬停时保持正文颜色。 */
+.post-content ul li:hover,
+.post-content ol li:hover {
+	color: inherit;
 }
 
 @media (min-width: 601px) {
