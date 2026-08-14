@@ -78,22 +78,10 @@
 	<?php if (!empty($this->options->sidebarBlock) && in_array('ShowCategory', $this->options->sidebarBlock)): ?>
 		<section class="widget">
 			<h3 class="widget-title">分类</h3>
-				<?php
-				// 当前分类及文章所属分类用于高亮分类树路径。
-				$currentCategory = 0;
-				if ($this->is('category')) {
-					$currentCategory = (int) $this->mid;
-				} elseif ($this->is('post') && !empty($this->categories)) {
-					$currentCategory = (int) $this->categories[0]['mid'];
-				}
-				$this->widget(
-					'Widget_Metas_Category_List@sidebar',
-					'current=' . $currentCategory
-				)->listCategories(array(
-					'wrapClass' => 'category-tree',
-					'itemClass' => 'category-tree-item'
-				));
-				?>
+			<ul class="widget-tile">
+				<?php $this->widget('Widget_Metas_Category_List')
+					->parse('<li><a href="{permalink}">{name}</a></li>'); ?>
+			</ul>
 		</section>
 	<?php endif; ?>
 	<?php if (!empty($this->options->SidebarCustomCode) && $this->options->SidebarCustomCode == 1 && $this->options->SidebarCustomCodePosition == 'after_category'): ?>
