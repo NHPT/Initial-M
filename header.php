@@ -125,6 +125,9 @@ $this->header('description=&social=&generator=&template=&pingback=&xmlrpc=&wlw=&
 <?php if ($this->options->Highlight): ?>
 <link rel="stylesheet" href="<?php cjUrl('code-block-tools.css') ?>" />
 <?php endif; ?>
+<?php if (!empty($this->options->sidebarBlock) && in_array('ShowCategory', $this->options->sidebarBlock)): ?>
+<link rel="stylesheet" href="<?php cjUrl('category-tree.css') ?>" />
+<?php endif; ?>
 <?php if ($this->options->CustomCSS): ?>
 <style type="text/css"><?php $this->options->CustomCSS(); ?></style>
 <?php endif; ?>
