@@ -185,6 +185,9 @@ $this->header('description=&social=&generator=&template=&pingback=&xmlrpc=&wlw=&
 <?php if ($this->options->RelatedPosts): ?>
 <link rel="stylesheet" href="<?php cjUrl('related-posts.css') ?>" />
 <?php endif; ?>
+<?php if ($this->options->catalog): ?>
+<link rel="stylesheet" href="<?php cjUrl('catalog-active.css') ?>" />
+<?php endif; ?>
 <?php if ($this->options->CustomCSS): ?>
 <style type="text/css"><?php $this->options->CustomCSS(); ?></style>
 <?php endif; ?>
