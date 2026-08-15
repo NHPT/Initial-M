@@ -181,12 +181,7 @@
 				positions.push(entries[i].target.getBoundingClientRect().top + scrollTop);
 			}
 
-			if (updateFrame !== null) {
-				cancelFrame(updateFrame);
-				updateFrame = null;
-			}
-
-			updateActive();
+			scheduleUpdate();
 		}
 
 		function scheduleMeasure() {
